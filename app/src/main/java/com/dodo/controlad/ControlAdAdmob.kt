@@ -22,21 +22,27 @@ object ControlAdAdmob {
     }
 
     fun showAdAdmob(showAdsFullAdmobListener: ShowAdsFullAdmobListener) {
-        mInterstitialAds.adListener = object : AdListener() {
 
-            override fun onAdFailedToLoad(p0: LoadAdError?) {
-                super.onAdFailedToLoad(p0)
-                showAdsFullAdmobListener.admobLoadFail()
+        if (mInterstitialAds.isLoaded) {
+            mInterstitialAds.adListener = object : AdListener() {
+
+                override fun onAdFailedToLoad(p0: LoadAdError?) {
+                    super.onAdFailedToLoad(p0)
+                    showAdsFullAdmobListener.admobLoadFail()
+                }
+
+                override fun onAdClosed() {
+                    super.onAdClosed()
+                    showAdsFullAdmobListener.admobClose()
+                    loadAdAdmob()
+                }
+
+
             }
-
-            override fun onAdClosed() {
-                super.onAdClosed()
-                showAdsFullAdmobListener.admobClose()
-                loadAdAdmob()
-            }
-
+            mInterstitialAds.show()
+        }else{
+            showAdsFullAdmobListener.admobLoadFail()
         }
-        mInterstitialAds.show()
     }
 
 
