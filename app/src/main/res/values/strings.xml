@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ControlAd</string>
+    <string name="admob_id_interstitial">/6499/example/interstitial</string>
+
+
+
+    <string name="ad_attribution">Ad</string>
+    <string name="id_admob_native">/6499/example/native</string>
+    <string name="todo">TODO</string>
+    <string name="todoa">TODO</string>
+</resources>
