@@ -75,7 +75,7 @@ object NativeAdAdmob {
 
 
     }
-     fun refreshAd(context : Activity, frameLayoutNative: FrameLayout, backgroundAds :String,  textTitleColor: String,textBodyColor: String, idAdmobNative : String, isMediaView: Boolean) {
+     fun refreshAd(context : Activity, frameLayoutNative: FrameLayout, backgroundAds :String,  textTitleColor: String,textBodyColor: String, idAdmobNative : String, isMediaView: Boolean, loadAdsNativeAds: ShowAdsNativeAdmobListener) {
 
         val builder = AdLoader.Builder(context, idAdmobNative)
 
@@ -88,7 +88,12 @@ object NativeAdAdmob {
 
          val adLoader = builder.withAdListener(object : AdListener() {
              override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                loadAdsNativeAds.loadAdsNativeAdmobFail()
+             }
 
+             override fun onAdLoaded() {
+                 super.onAdLoaded()
+                 loadAdsNativeAds.loadAdsNativeAdmobCompleted()
              }
 
          }

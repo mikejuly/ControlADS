@@ -10,7 +10,16 @@ class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.second_activity)
-        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true)
+        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true, object : ShowAdsNativeAdmobListener{
+            override fun loadAdsNativeAdmobCompleted() {
+
+            }
+
+            override fun loadAdsNativeAdmobFail() {
+            
+            }
+
+        })
 
         ControlAdAdmob.showAdAdmob(showAdsFullAdmobListener = object : ShowAdsFullAdmobListener{
             override fun admobLoadFail() {
