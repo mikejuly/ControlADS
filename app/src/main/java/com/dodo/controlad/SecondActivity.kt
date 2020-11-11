@@ -2,32 +2,34 @@ package com.dodo.controlad
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.framelayout_ads_native
+import com.dodo.controlad.admob.InterstitialAdAdmob
+import com.dodo.controlad.admob.NativeAdAdmob
+import com.dodo.controlad.admob.ShowInterstitialAdsAdmobListener
+import com.dodo.controlad.admob.ShowNativeAdsAdmobListener
 import kotlinx.android.synthetic.main.second_activity.*
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.second_activity)
-        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true, object : ShowAdsNativeAdmobListener{
-            override fun loadAdsNativeAdmobCompleted() {
+        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true, object : ShowNativeAdsAdmobListener {
+            override fun onLoadAdsNativeAdmobCompleted() {
 
             }
 
-            override fun loadAdsNativeAdmobFail() {
+            override fun onLoadAdsNativeAdmobFail() {
             
             }
 
         })
 
-        ControlAdAdmob.showAdAdmob(showAdsFullAdmobListener = object : ShowAdsFullAdmobListener{
-            override fun admobLoadFail() {
+        InterstitialAdAdmob.showAdAdmob(this,showInterstitialAdsAdmobListener = object : ShowInterstitialAdsAdmobListener {
+            override fun onLoadFailInterstitialAdsAdmob() {
 
             }
 
-            override fun admobClose() {
-              ControlAdAdmob.loadAdAdmob()
+            override fun onInterstitialAdsAdmobClose() {
+              InterstitialAdAdmob.loadAdAdmob()
             }
 
         })

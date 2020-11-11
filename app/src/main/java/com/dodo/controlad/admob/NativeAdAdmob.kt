@@ -1,12 +1,12 @@
-package com.dodo.controlad
+package com.dodo.controlad.admob
 
 import android.app.Activity
 import android.graphics.Color
 import android.view.View
 import android.widget.*
+import com.dodo.controlad.R
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest
-import com.google.android.gms.ads.formats.MediaView
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import kotlinx.android.synthetic.main.admob_native_layout.view.*
@@ -75,7 +75,7 @@ object NativeAdAdmob {
 
 
     }
-     fun refreshAd(context : Activity, frameLayoutNative: FrameLayout, backgroundAds :String,  textTitleColor: String,textBodyColor: String, idAdmobNative : String, isMediaView: Boolean, loadAdsNativeAds: ShowAdsNativeAdmobListener) {
+     fun refreshAd(context : Activity, frameLayoutNative: FrameLayout, backgroundAds :String,  textTitleColor: String,textBodyColor: String, idAdmobNative : String, isMediaView: Boolean, loadAdsNativeAds: ShowNativeAdsAdmobListener) {
 
         val builder = AdLoader.Builder(context, idAdmobNative)
 
@@ -88,12 +88,12 @@ object NativeAdAdmob {
 
          val adLoader = builder.withAdListener(object : AdListener() {
              override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                loadAdsNativeAds.loadAdsNativeAdmobFail()
+                loadAdsNativeAds.onLoadAdsNativeAdmobFail()
              }
 
              override fun onAdLoaded() {
                  super.onAdLoaded()
-                 loadAdsNativeAds.loadAdsNativeAdmobCompleted()
+                 loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
              }
 
          }

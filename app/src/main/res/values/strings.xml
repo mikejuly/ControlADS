@@ -8,4 +8,6 @@
     <string name="id_admob_native">/6499/example/native</string>
     <string name="todo">TODO</string>
     <string name="todoa">TODO</string>
+    <string name="loading_ads">Loading Ads...</string>
+    <string name="id_admob_reward">ca-app-pub-3940256099942544/5224354917</string>
 </resources>

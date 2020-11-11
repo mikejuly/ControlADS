@@ -46,4 +46,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:19.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+
+    // dialog
+    implementation 'com.github.chnouman:AwesomeDialog:1.0.4'
 }
