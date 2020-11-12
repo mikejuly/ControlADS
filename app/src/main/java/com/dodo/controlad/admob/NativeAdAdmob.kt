@@ -3,9 +3,14 @@ package com.dodo.controlad.admob
 import android.app.Activity
 import android.graphics.Color
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import com.dodo.controlad.R
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
@@ -35,13 +40,11 @@ object NativeAdAdmob {
         (adView.headlineView as TextView).text = nativeAd.headline
 
 
-
         if (isMediaView){
             adView.mediaView.visibility = View.VISIBLE
             adView.mediaView.setMediaContent(nativeAd.mediaContent)
         }else{
             adView.mediaView.visibility = View.GONE
-
         }
 
         // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to

@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dodo.controlad.admob.*
+import com.dodo.controlad.facebook.ControlAdFacebook
+import com.dodo.controlad.facebook.ShowInterstitialAdsFacebook
 import com.google.android.gms.ads.rewarded.RewardItem
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,6 +26,20 @@ class MainActivity : AppCompatActivity() {
         // Init ads Full Admob...
         InterstitialAdAdmob.initAdAdmob(this, this.getString(R.string.admob_id_interstitial))
 
+        ControlAdFacebook.initFacebookAds(this,this.getString(R.string.id_interstitial_facebook),object :ShowInterstitialAdsFacebook{
+            override fun onLoadFailInterstitialAdsFacebook() {
+              Log.e("vao day", "fail")
+            }
+
+            override fun onLoadedInterstitialAdsFacebook() {
+                Log.e("vao day", "load done")
+            }
+
+            override fun onCloseInterstitialAdsFacebook() {
+                Log.e("vao day", "close")
+            }
+
+        })
 
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "#99FFFF", "#000000", "#000000",
             this.getString(R.string.id_admob_native),false, object : ShowNativeAdsAdmobListener {
@@ -48,6 +64,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
+
+
         }
 
 
