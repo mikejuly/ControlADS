@@ -35,7 +35,7 @@ class AppOpenManager(
     }
 
 
-    fun fetchAd() {
+    fun fetchAd(admobIdOpenApp : String) {
         if (isAdAvailable()) {
             return
         }
@@ -67,7 +67,7 @@ class AppOpenManager(
 
         val request: AdRequest = getAdRequest()
         AppOpenAd.load(
-            myApplication, myApplication.getString(R.string.admob_id_ads_open), request,
+            myApplication,admobIdOpenApp , request,
             AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT, loadCallBack
         )
     }

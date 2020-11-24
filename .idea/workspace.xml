@@ -32,37 +32,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="095dddb7-3208-4a16-82a9-160e2b144bc9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_extensions_2_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_lifecycle_lifecycle_process_2_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/SplashActivityControlAds.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/admob/AppOpenManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/admob/ShowOpenAdsAdmobListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_multidex_multidex_2_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_multidex_multidex_instrumentation_2_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/ControlAd.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/ControlAd.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/MainActivityControlAds.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/SecondActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/SecondActivityControlAds.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/facebook/ControlAdFacebook.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/facebook/ControlAdFacebook.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/SplashActivityControlAds.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/SplashActivityControlAds.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/admob/AppOpenManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dodo/controlad/admob/AppOpenManager.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +99,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="outdated.bundled.kotlin.compiler" value="1.3.72-release-Studio4.1-5" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -234,9 +213,10 @@
       <screen x="0" y="25" width="2560" height="1343" />
     </state>
     <state x="1219" y="518" key="#Notifications/0.25.2560.1343/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1343" timestamp="1605061714350" />
-    <state x="644" y="400" key="#PSD" timestamp="1604929799966">
-      <screen x="0" y="25" width="2560" height="1351" />
+    <state x="644" y="401" key="#PSD" timestamp="1606231556086">
+      <screen x="0" y="25" width="2560" height="1355" />
     </state>
+    <state x="644" y="401" key="#PSD/0.25.2560.1355/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1355" timestamp="1606231556086" />
     <state x="644" y="400" key="#PSD/2560.25.2560.1415/-1680.356.1680.1025/0.25.2560.1351@0.25.2560.1351" timestamp="1604929799966" />
     <state x="769" y="247" key="#Plugins" timestamp="1604984057493">
       <screen x="0" y="25" width="2560" height="1343" />
@@ -346,13 +326,13 @@
     <state width="2105" height="237" key="GridCell.Tab.1.right/0.25.2560.1343/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1343" timestamp="1605019899288" />
     <state width="2373" height="313" key="GridCell.Tab.1.right/0.25.2560.1355/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1355" timestamp="1606200697739" />
     <state width="2336" height="237" key="GridCell.Tab.1.right/2560.25.2560.1415/-1680.415.1680.1025/0.25.2560.1343@0.25.2560.1343" timestamp="1605149146323" />
-    <state x="743" y="368" width="1617" height="894" key="IDE.errors.dialog" timestamp="1606207943649">
+    <state x="743" y="368" width="1617" height="894" key="IDE.errors.dialog" timestamp="1606231178275">
       <screen x="0" y="25" width="2560" height="1355" />
     </state>
     <state x="743" y="365" width="1617" height="894" key="IDE.errors.dialog/0.25.2560.1343/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1343" timestamp="1605061705695" />
     <state x="743" y="365" key="IDE.errors.dialog/0.25.2560.1343/2560.25.2560.1415@0.25.2560.1343" timestamp="1604984080854" />
     <state x="3303" y="383" key="IDE.errors.dialog/0.25.2560.1345/2560.25.2560.1415/-1680.415.1680.1025@2560.25.2560.1415" timestamp="1605518059156" />
-    <state x="743" y="368" key="IDE.errors.dialog/0.25.2560.1355/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1355" timestamp="1606207943649" />
+    <state x="743" y="368" key="IDE.errors.dialog/0.25.2560.1355/2560.25.2560.1415/-1680.415.1680.1025@0.25.2560.1355" timestamp="1606231178275" />
     <state x="513" y="25" width="1320" height="1130" key="ScreenshotViewer.Dimensions" timestamp="1605156062630">
       <screen x="0" y="25" width="2560" height="1343" />
     </state>
