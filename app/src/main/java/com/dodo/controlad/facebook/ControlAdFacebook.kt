@@ -14,7 +14,7 @@ object ControlAdFacebook {
         // Initialize the Audience Network SDK
         AudienceNetworkAds.initialize(context);
         val interstitialAd = InterstitialAd(context,idInterstitialFacebook)
-        AdSettings.addTestDevice("5e6f5705-ca33-4e29-a9ee-7465703e0c88")
+        AdSettings.addTestDevice("6cd13028-a845-4f4f-94d9-50ca8e89b7ae")
         val dialog = Dialog(context, R.style.DialogFragmentTheme)
         dialog.setContentView(R.layout.dialog_loading_ads_fullscreen)
         dialog.show()
@@ -29,6 +29,7 @@ object ControlAdFacebook {
 
             override fun onError(ad: Ad?, adError: AdError) {
                 showInterstitialAdsFacebook.onCloseInterstitialAdsFacebook()
+                dialog.dismiss()
             }
 
             override fun onAdLoaded(ad: Ad) {
