@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import com.dodo.controlad.admob.AppOpenManager
+import com.dodo.controlad.admob.ControlAdsAdmob
 import com.dodo.controlad.admob.ShowOpenAdsAdmobListener
 import com.google.android.gms.ads.MobileAds
 
@@ -14,7 +15,7 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this) { }
+        ControlAdsAdmob.initAdmob(this)
          appOpenManager = AppOpenManager(application as Application)
         appOpenManager.fetchAd(this.getString(R.string.admob_id_ads_open), this)
 
