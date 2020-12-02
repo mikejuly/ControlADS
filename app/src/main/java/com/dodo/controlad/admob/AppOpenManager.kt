@@ -15,8 +15,7 @@ import java.util.*
 
 
 class AppOpenManager(
-    context: Application,
-    showOpenAdsAdmobListenerTemp: ShowOpenAdsAdmobListener
+    context: Application
 ) : Application.ActivityLifecycleCallbacks,
     LifecycleObserver {
 
@@ -25,17 +24,16 @@ class AppOpenManager(
     private var myApplication: Application = context
     private lateinit var currentActivity: Activity
     private var loadTime: Long = 0
-    private var showOpenAdsAdmobListener: ShowOpenAdsAdmobListener
     lateinit var fullScreenContentCallback: FullScreenContentCallback
 
     init {
         this.myApplication.registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
-        showOpenAdsAdmobListener = showOpenAdsAdmobListenerTemp
     }
 
 
-    fun fetchAd(admobIdOpenApp : String) {
+    fun fetchAd(admobIdOpenApp : String,
+                showOpenAdsAdmobListener: ShowOpenAdsAdmobListener) {
         if (isAdAvailable()) {
             return
         }

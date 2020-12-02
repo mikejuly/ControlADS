@@ -17,8 +17,8 @@
         <item name="android:height">15dp</item>
     </style>
 
-    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
+    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingLeft">0dp</item>

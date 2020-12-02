@@ -15,8 +15,8 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MobileAds.initialize(this) { }
-         appOpenManager = AppOpenManager(application as Application,this)
-        appOpenManager.fetchAd(this.getString(R.string.admob_id_ads_open))
+         appOpenManager = AppOpenManager(application as Application)
+        appOpenManager.fetchAd(this.getString(R.string.admob_id_ads_open), this)
 
     }
 

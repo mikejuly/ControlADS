@@ -10,7 +10,6 @@
         android:background="@android:color/white"
         android:gravity="center">
 
-
         <ProgressBar
             android:layout_width="60dp"
             android:layout_height="60dp"/>
@@ -18,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:paddingLeft="10sp"
+
             android:text="@string/loading_ads"
             />
     </LinearLayout>
