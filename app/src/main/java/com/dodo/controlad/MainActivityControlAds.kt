@@ -81,7 +81,7 @@ class MainActivityControlAds : AppCompatActivity() {
                     Toast.makeText(this@MainActivityControlAds, "close ads ",Toast.LENGTH_LONG).show()
                 }
 
-                override fun onAdsAdmobRewarded(rewardItem: RewardItem) {
+                override fun onAdsAdmobRewarded(rewardItem: Int) {
                     Toast.makeText(this@MainActivityControlAds, "Nhan thuongw thoi ",Toast.LENGTH_LONG).show()
                 }
 
