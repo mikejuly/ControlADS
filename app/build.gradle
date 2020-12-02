@@ -52,7 +52,7 @@ dependencies {
 
 
     //ads Facebook
-    implementation 'com.facebook.android:audience-network-sdk:5.11.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
 
     // dialog
     implementation 'com.github.chnouman:AwesomeDialog:1.0.4'

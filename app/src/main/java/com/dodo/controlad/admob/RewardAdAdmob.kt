@@ -85,7 +85,7 @@ object RewardAdAdmob {
         if (mRewardedAd.isLoaded){
             val adCallBack = object : RewardedAdCallback(){
                 override fun onUserEarnedReward(p0: RewardItem) {
-                   showRewardListener.onAdsAdmobRewarded(p0)
+                   showRewardListener.onAdsAdmobRewarded(p0.amount)
                 }
 
                 override fun onRewardedAdClosed() {
