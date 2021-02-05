@@ -2,11 +2,13 @@ package com.dodo.controlad.admob
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.dodo.controlad.R
+import com.dodo.controlad.unity.CheckUtility
+import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
@@ -32,12 +34,21 @@ class AppOpenManager(
     }
 
 
-    fun fetchAd(admobIdOpenApp : String,
-                showOpenAdsAdmobListener: ShowOpenAdsAdmobListener) {
+    fun fetchAd(context: Context,
+        admobIdOpenApp: String,
+        showOpenAdsAdmobListener: ShowOpenAdsAdmobListener, isInEEA: Boolean
+    ) {
+        if (!CheckUtility.verifyAvailableNetwork(context)){
+            showOpenAdsAdmobListener.onLoadFailAdsOpenApp()
+            return
+        }
+
         if (isAdAvailable()) {
             return
         }
+
         loadCallBack = object : AppOpenAd.AppOpenAdLoadCallback() {
+
             override fun onAppOpenAdLoaded(ad: AppOpenAd) {
                 super.onAppOpenAdLoaded(ad)
                 appOpenAd = ad
@@ -61,11 +72,12 @@ class AppOpenManager(
                 showOpenAdsAdmobListener.onLoadFailAdsOpenApp()
                 Log.e("Control Ads ", "load ad open app FAIL")
             }
+
         }
 
-        val request: AdRequest = getAdRequest()
+        val request: AdRequest = getAdRequest(isInEEA)
         AppOpenAd.load(
-            myApplication,admobIdOpenApp , request,
+            myApplication, admobIdOpenApp, request,
             AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT, loadCallBack
         )
     }
@@ -77,12 +89,20 @@ class AppOpenManager(
         return dateDifference < numMilliSecondsPerHour * numHours
     }
 
-    private fun getAdRequest(): AdRequest {
-        return AdRequest.Builder().build()
+    private fun getAdRequest(isInEEA: Boolean): AdRequest {
+        if (isInEEA) {
+            val extras = Bundle()
+            extras.putString("npa", "1")
+
+            return AdRequest.Builder().addNetworkExtrasBundle(AdMobAdapter::class.java, extras).build()
+        } else {
+            return AdRequest.Builder().build()
+        }
+
     }
 
     private fun isAdAvailable(): Boolean {
-        return appOpenAd != null && wasLoadTimeLessThanNHoursAgo(4)
+            return appOpenAd != null && wasLoadTimeLessThanNHoursAgo(4)
     }
 
     // implement Application.ActivityLifecycleCallbacks

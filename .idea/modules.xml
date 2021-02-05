@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ControlAd.iml" filepath="$PROJECT_DIR$/.idea/modules/ControlAd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ControlAd.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ControlAd.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/unity-ads/ControlAd.unity-ads.iml" filepath="$PROJECT_DIR$/.idea/modules/unity-ads/ControlAd.unity-ads.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/unity-ads1/ControlAd.unity-ads1.iml" filepath="$PROJECT_DIR$/.idea/modules/unity-ads1/ControlAd.unity-ads1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/unity-adsr/ControlAd.unity-adsr.iml" filepath="$PROJECT_DIR$/.idea/modules/unity-adsr/ControlAd.unity-adsr.iml" />
     </modules>
   </component>
 </project>

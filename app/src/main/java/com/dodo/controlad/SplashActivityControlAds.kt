@@ -17,8 +17,12 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
         super.onCreate(savedInstanceState)
         ControlAdsAdmob.initAdmob(this)
          appOpenManager = AppOpenManager(application as Application)
-        appOpenManager.fetchAd(this.getString(R.string.admob_id_ads_open), this)
+        appOpenManager.fetchAd(this,this.getString(R.string.admob_id_ads_open), this,true)
 
+        /**
+         *Ad Units should be in the type of IronSource.Ad_Unit.AdUnitName, example
+         */
+        //IronSource.init(this, "e9297561", IronSource.AD_UNIT.OFFERWALL, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.BANNER);
     }
 
     override fun onLoadedAdsOpenApp() {
@@ -26,7 +30,9 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
     }
 
     override fun onLoadFailAdsOpenApp() {
-
+        val intent = Intent(this, MainActivityControlAds::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onShowAdsOpenAppDismissed() {

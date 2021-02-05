@@ -7,28 +7,31 @@ import android.os.Handler
 import android.os.Looper
 import com.dodo.controlad.R
 import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd
 
 
+object  InterstitialAdAdmob {
 
-object InterstitialAdAdmob {
-
-    private lateinit var mInterstitialAds: PublisherInterstitialAd
+    private lateinit var mInterstitialAds: InterstitialAd
 
     fun initAdAdmob(context: Context, idAdmobInterstitial: String) {
-        mInterstitialAds = PublisherInterstitialAd(context)
+        mInterstitialAds = InterstitialAd(context)
         mInterstitialAds.adUnitId = idAdmobInterstitial
         loadAdAdmob()
     }
 
 
      fun loadAdAdmob() {
-        mInterstitialAds.loadAd(PublisherAdRequest.Builder().build())
+         mInterstitialAds.loadAd(AdRequest.Builder().build())
     }
 
     fun showAdAdmob(context: Context, showInterstitialAdsAdmobListener: ShowInterstitialAdsAdmobListener) {
+
+        if (!mInterstitialAds.isLoaded){
+            return
+        }
 
         val dialog = Dialog(context, R.style.DialogFragmentTheme)
         dialog.setContentView(R.layout.dialog_loading_ads_fullscreen)
@@ -51,12 +54,14 @@ object InterstitialAdAdmob {
                         loadAdAdmob()
                     }
 
+
                 }
                 mInterstitialAds.show()
             }else{
                 showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
+                dialog.dismiss()
             }
-        },600)
+        },400)
 
 
     }

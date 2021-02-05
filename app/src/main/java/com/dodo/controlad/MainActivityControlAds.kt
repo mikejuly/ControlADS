@@ -6,7 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dodo.controlad.admob.*
+import com.dodo.controlad.unity.ControlAdUnity
+import com.dodo.controlad.unity.ShowInterstitialAdsUnityListener
 import com.google.android.gms.ads.rewarded.RewardItem
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -18,6 +21,17 @@ class MainActivityControlAds : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ControlAdUnity.initUnityAd(this,object : ShowInterstitialAdsUnityListener{
+            override fun onLoadFailInterstitialAdsUnity() {
+                Toast.makeText(this@MainActivityControlAds, "fail roi day ", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onInterstitialAdsUnityClose() {
+                Toast.makeText(this@MainActivityControlAds, "done roi day ", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
         // Init ads Reward Admob...
         RewardAdAdmob.loadRewardAdAdmob(this, getString(R.string.id_admob_reward))
@@ -55,15 +69,19 @@ class MainActivityControlAds : AppCompatActivity() {
 
         // Show ads full admob...
         btn_show_ads.setOnClickListener {
-            InterstitialAdAdmob.showAdAdmob(this,object : ShowInterstitialAdsAdmobListener {
-                override fun onLoadFailInterstitialAdsAdmob() {
 
-                }
+            ControlAdUnity.displayInterstitialAd(this )
 
-                override fun onInterstitialAdsAdmobClose() {
-
-                }
-            })
+            // Show admob full
+//            InterstitialAdAdmob.showAdAdmob(this,object : ShowInterstitialAdsAdmobListener {
+//                override fun onLoadFailInterstitialAdsAdmob() {
+//
+//                }
+//
+//                override fun onInterstitialAdsAdmobClose() {
+//
+//                }
+//            })
 
 
         }
