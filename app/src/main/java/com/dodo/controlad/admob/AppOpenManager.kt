@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.dodo.controlad.R
+import com.dodo.controlad.common.CheckUtility
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
@@ -34,6 +35,10 @@ class AppOpenManager(
 
     fun fetchAd(admobIdOpenApp : String,
                 showOpenAdsAdmobListener: ShowOpenAdsAdmobListener) {
+        if (!CheckUtility.isNetworkAvailable(myApplication)){
+            showOpenAdsAdmobListener.onLoadFailAdsOpenApp()
+            return
+        }
         if (isAdAvailable()) {
             return
         }

@@ -1,5 +1,5 @@
 plugins {
- //   id 'com.android.application'
+   // id 'com.android.application'
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
@@ -42,17 +42,17 @@ dependencies {
 
 
     //ads admob
-    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // admob open appp
-    def lifecycle_version = "2.0.0"
+    def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
 
     //ads Facebook
-    implementation 'com.facebook.android:audience-network-sdk:5.11.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
 
     // dialog
     implementation 'com.github.chnouman:AwesomeDialog:1.0.4'

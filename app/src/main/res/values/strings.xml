@@ -12,4 +12,5 @@
     <string name="id_admob_reward">ca-app-pub-3940256099942544/5224354917</string>
     <string name="id_interstitial_facebook">342247763579455_342248430246055</string>
     <string name="admob_id_ads_open">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="admob_id_app">ca-app-pub-3940256099942544~3347511713</string>
 </resources>

@@ -26,7 +26,9 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
     }
 
     override fun onLoadFailAdsOpenApp() {
-
+        val intent = Intent(this, MainActivityControlAds::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onShowAdsOpenAppDismissed() {
