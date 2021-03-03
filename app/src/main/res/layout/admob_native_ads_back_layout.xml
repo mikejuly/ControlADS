@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:id="@+id/layout_ads_native_back"
+    android:visibility="gone">
+
+        <View
+            android:id="@+id/rl_transparent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#66000000"
+            app:layout_constraintBottom_toTopOf="@+id/rl_ads"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rl_ads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/fr_ads_native_back"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <TextView
+                    android:id="@+id/tv_exit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:text="@string/txt_exit_app"
+                    android:textSize="22sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    />
+
+                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_exit"
+                     android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_exit_app"
+                     android:textColor="@color/black"
+                   app:layout_constraintBottom_toTopOf="@+id/view_div"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:background="@drawable/buttons_exit"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_exit"
+                     android:layout_marginBottom="10dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_no_exit"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_no"
+                    android:textColor="@color/white"
+                    android:background="@drawable/buttons_no_exit"
+                    app:layout_constraintBottom_toTopOf="@+id/view_div"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_exit"
+                    android:layout_marginBottom="10dp"
+                    />
+
+                <View
+                    android:id="@+id/view_div"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@color/gray_400"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                   />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fr_ads_native_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingBottom="10dp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,35 +3,29 @@ package com.dodo.controlad
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.dodo.controlad.admob.*
-import com.dodo.controlad.unity.ControlAdUnity
-import com.dodo.controlad.unity.ShowInterstitialAdsUnityListener
-import com.google.android.gms.ads.rewarded.RewardItem
-
 import kotlinx.android.synthetic.main.activity_main.*
-
-
-
+import kotlinx.android.synthetic.main.admob_native_ads_back_layout.*
 
 
 class MainActivityControlAds : AppCompatActivity() {
 
+    var isloadAdsNativeBack :Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ControlAdUnity.initUnityAd(this,object : ShowInterstitialAdsUnityListener{
-            override fun onLoadFailInterstitialAdsUnity() {
-                Toast.makeText(this@MainActivityControlAds, "fail roi day ", Toast.LENGTH_SHORT).show()
-            }
 
-            override fun onInterstitialAdsUnityClose() {
-                Toast.makeText(this@MainActivityControlAds, "done roi day ", Toast.LENGTH_SHORT).show()
-            }
+        val inflater = LayoutInflater.from(this)
+        inflater.inflate(R.layout.admob_native_ads_back_layout, layout_main)
+        layout_ads_native_back.visibility = View.GONE
 
-        })
 
         // Init ads Reward Admob...
         RewardAdAdmob.loadRewardAdAdmob(this, getString(R.string.id_admob_reward))
@@ -56,7 +50,7 @@ class MainActivityControlAds : AppCompatActivity() {
 //        })
 
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "#99FFFF", "#000000", "#000000",
-            this.getString(R.string.id_admob_native),false, object : ShowNativeAdsAdmobListener {
+            this.getString(R.string.id_admob_native), false, object : ShowNativeAdsAdmobListener {
                 override fun onLoadAdsNativeAdmobCompleted() {
                     Log.e("vao day", "vao")
                 }
@@ -65,23 +59,29 @@ class MainActivityControlAds : AppCompatActivity() {
 
                 }
             })
+        NativeAdAdmob.refreshAdNativeBack(this,layout_ads_native_back , fr_ads_native_back,
+            this.getString(R.string.id_admob_native), true, object : ShowNativeAdsAdmobListener {
+                override fun onLoadAdsNativeAdmobCompleted() {
+                    Log.e("vao day", "vao")
+                    isloadAdsNativeBack = true
+                }
 
+                override fun onLoadAdsNativeAdmobFail() {
+
+                }
+            })
 
         // Show ads full admob...
         btn_show_ads.setOnClickListener {
+            InterstitialAdAdmob.showAdAdmob(this, object : ShowInterstitialAdsAdmobListener {
+                override fun onLoadFailInterstitialAdsAdmob() {
 
-            ControlAdUnity.displayInterstitialAd(this )
+                }
 
-            // Show admob full
-//            InterstitialAdAdmob.showAdAdmob(this,object : ShowInterstitialAdsAdmobListener {
-//                override fun onLoadFailInterstitialAdsAdmob() {
-//
-//                }
-//
-//                override fun onInterstitialAdsAdmobClose() {
-//
-//                }
-//            })
+                override fun onInterstitialAdsAdmobClose() {
+
+                }
+            })
 
 
         }
@@ -89,21 +89,32 @@ class MainActivityControlAds : AppCompatActivity() {
 
         // Show ads reward admob....
         btn_show_reward.setOnClickListener {
-            RewardAdAdmob.showDialogWithTitleRewardAdsAdmob(this,"Nhận phần thưởng", "Bạn muốn xem quảng cáo nhận thưởng không? ","Ok nhận","Không Nhận", object :
-                ShowRewardAdsAdmobListener {
-                override fun onRewardAdsAdmobLoadFail() {
+            RewardAdAdmob.showDialogWithTitleRewardAdsAdmob(
+                this,
+                "Nhận phần thưởng",
+                "Bạn muốn xem quảng cáo nhận thưởng không? ",
+                "Ok nhận",
+                "Không Nhận",
+                object :
+                    ShowRewardAdsAdmobListener {
+                    override fun onRewardAdsAdmobLoadFail() {
 
-                }
+                    }
 
-                override fun onRewardAdsAdmodClose() {
-                    Toast.makeText(this@MainActivityControlAds, "close ads ",Toast.LENGTH_LONG).show()
-                }
+                    override fun onRewardAdsAdmodClose() {
+                        Toast.makeText(this@MainActivityControlAds, "close ads ", Toast.LENGTH_LONG)
+                            .show()
+                    }
 
-                override fun onAdsAdmobRewarded(rewardItem: Int) {
-                    Toast.makeText(this@MainActivityControlAds, "Nhan thuongw thoi ",Toast.LENGTH_LONG).show()
-                }
+                    override fun onAdsAdmobRewarded(rewardItem: Int) {
+                        Toast.makeText(
+                            this@MainActivityControlAds,
+                            "Nhan thuongw thoi ",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-            })
+                })
         }
 
 
@@ -114,9 +125,22 @@ class MainActivityControlAds : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
+
     }
 
 
+    override fun onBackPressed() {
+        if (isloadAdsNativeBack){
+            layout_ads_native_back.visibility = View.VISIBLE
+        }else{
+            super.onBackPressed()
+        }
+
+
+
+    }
 
 
 

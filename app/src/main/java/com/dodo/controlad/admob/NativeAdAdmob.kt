@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.dodo.controlad.R
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -14,12 +15,20 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
+import kotlinx.android.synthetic.main.admob_native_ads_back_layout.view.*
 import kotlinx.android.synthetic.main.admob_native_layout.view.*
 
 object NativeAdAdmob {
 
 
-    private fun populateUnifiedNativeAdView( nativeAd: UnifiedNativeAd, adView: UnifiedNativeAdView, backgroundAds: String, textTitleColor: String, textBodyColor: String, isMediaView: Boolean) {
+    private fun populateUnifiedNativeAdView(
+        nativeAd: UnifiedNativeAd,
+        adView: UnifiedNativeAdView,
+        backgroundAds: String,
+        textTitleColor: String,
+        textBodyColor: String,
+        isMediaView: Boolean
+    ) {
         // Set the media view.
         adView.mediaView = adView.findViewById(R.id.ad_media)
 
@@ -30,7 +39,11 @@ object NativeAdAdmob {
         adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
 
 
-        adView.layout_ads_native.setBackgroundColor(Color.parseColor(backgroundAds))
+        if (backgroundAds != "") {
+            adView.layout_ads_native.setBackgroundColor(Color.parseColor(backgroundAds))
+        }
+
+
         (adView.headlineView as TextView).setTextColor(Color.parseColor(textTitleColor))
         (adView.bodyView as TextView).setTextColor(Color.parseColor(textBodyColor))
 
@@ -40,10 +53,10 @@ object NativeAdAdmob {
         (adView.headlineView as TextView).text = nativeAd.headline
 
 
-        if (isMediaView){
+        if (isMediaView) {
             adView.mediaView.visibility = View.VISIBLE
             adView.mediaView.setMediaContent(nativeAd.mediaContent)
-        }else{
+        } else {
             adView.mediaView.visibility = View.GONE
         }
 
@@ -67,7 +80,7 @@ object NativeAdAdmob {
             adView.iconView.visibility = View.GONE
         } else {
             (adView.iconView as ImageView).setImageDrawable(
-                    nativeAd.icon.drawable
+                nativeAd.icon.drawable
             )
             adView.iconView.visibility = View.VISIBLE
         }
@@ -78,33 +91,161 @@ object NativeAdAdmob {
 
 
     }
-     fun refreshAd(context : Activity, frameLayoutNative: FrameLayout, backgroundAds :String,  textTitleColor: String,textBodyColor: String, idAdmobNative : String, isMediaView: Boolean, loadAdsNativeAds: ShowNativeAdsAdmobListener) {
+
+
+    fun refreshAd(
+        context: Activity,
+        frameLayoutNative: FrameLayout,
+        backgroundAds: String,
+        textTitleColor: String,
+        textBodyColor: String,
+        idAdmobNative: String,
+        isMediaView: Boolean,
+        loadAdsNativeAds: ShowNativeAdsAdmobListener
+    ) {
 
         val builder = AdLoader.Builder(context, idAdmobNative)
 
-            builder.forUnifiedNativeAd { unifiedNativeAd ->
-                val adView = context.layoutInflater.inflate(R.layout.admob_native_layout, null) as UnifiedNativeAdView
-                populateUnifiedNativeAdView(unifiedNativeAd, adView,backgroundAds,textTitleColor,textBodyColor,isMediaView)
-                frameLayoutNative.removeAllViews()
-                frameLayoutNative.addView(adView)
+        builder.forUnifiedNativeAd { unifiedNativeAd ->
+            val adView = context.layoutInflater.inflate(
+                R.layout.admob_native_layout,
+                null
+            ) as UnifiedNativeAdView
+            populateUnifiedNativeAdView(
+                unifiedNativeAd,
+                adView,
+                backgroundAds,
+                textTitleColor,
+                textBodyColor,
+                isMediaView
+            )
+            frameLayoutNative.removeAllViews()
+            frameLayoutNative.addView(adView)
+        }
+
+        val adLoader = builder.withAdListener(object : AdListener() {
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                loadAdsNativeAds.onLoadAdsNativeAdmobFail()
             }
 
-         val adLoader = builder.withAdListener(object : AdListener() {
-             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
+            }
+
+        }
+
+        ).build()
+
+        adLoader.loadAd(PublisherAdRequest.Builder().build())
+
+
+    }
+
+    private fun populateUnifiedNativeAdView(
+        nativeAd: UnifiedNativeAd,
+        adView: UnifiedNativeAdView,
+        isMediaView: Boolean
+    ) {
+        adView.mediaView = adView.findViewById(R.id.ad_media)
+
+        adView.headlineView = adView.findViewById(R.id.ad_headline)
+        adView.bodyView = adView.findViewById(R.id.ad_body)
+        adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
+
+        adView.iconView = adView.findViewById(R.id.ad_app_icon)
+
+        (adView.headlineView as TextView).text = nativeAd.headline
+
+
+        if (isMediaView) {
+            adView.mediaView.visibility = View.VISIBLE
+            adView.mediaView.setMediaContent(nativeAd.mediaContent)
+        } else {
+            adView.mediaView.visibility = View.GONE
+        }
+
+        if (nativeAd.body == null) {
+            adView.bodyView.visibility = View.INVISIBLE
+        } else {
+            adView.bodyView.visibility = View.VISIBLE
+            (adView.bodyView as TextView).text = nativeAd.body
+        }
+
+        if (nativeAd.callToAction == null) {
+            adView.callToActionView.visibility = View.INVISIBLE
+        } else {
+            adView.callToActionView.visibility = View.VISIBLE
+            (adView.callToActionView as Button).text = nativeAd.callToAction
+        }
+
+        if (nativeAd.icon == null) {
+            adView.iconView.visibility = View.GONE
+        } else {
+            (adView.iconView as ImageView).setImageDrawable(
+                nativeAd.icon.drawable
+            )
+            adView.iconView.visibility = View.VISIBLE
+        }
+
+        adView.setNativeAd(nativeAd)
+
+
+    }
+
+    fun refreshAdNativeBack(
+        context: Activity,
+        constraintLayoutBack: ConstraintLayout,
+        frameLayoutNative: FrameLayout,
+        idAdmobNative: String,
+        isMediaView: Boolean,
+        loadAdsNativeAds: ShowNativeAdsAdmobListener
+    ) {
+
+
+
+        val builder = AdLoader.Builder(context, idAdmobNative)
+
+
+        builder.forUnifiedNativeAd { unifiedNativeAd ->
+            val adView = context.layoutInflater.inflate(
+                R.layout.admob_native_layout,
+                null
+            ) as UnifiedNativeAdView
+            populateUnifiedNativeAdView(
+                unifiedNativeAd,
+                adView,
+                isMediaView
+            )
+
+            frameLayoutNative.removeAllViews()
+            frameLayoutNative.addView(adView)
+        }
+
+        val adLoader = builder.withAdListener(object : AdListener() {
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                 loadAdsNativeAds.onLoadAdsNativeAdmobFail()
-             }
+            }
 
-             override fun onAdLoaded() {
-                 super.onAdLoaded()
-                 loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
-             }
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+                loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
+            }
 
-         }
+        }
 
-         ).build()
+        ).build()
 
-         adLoader.loadAd(PublisherAdRequest.Builder().build())
-
+        constraintLayoutBack.btn_exit.setOnClickListener {
+            context.finish()
+        }
+        constraintLayoutBack.btn_no_exit.setOnClickListener {
+            constraintLayoutBack.visibility = View.GONE
+        }
+        constraintLayoutBack.rl_transparent.setOnClickListener {
+            constraintLayoutBack.visibility = View.GONE
+        }
+        adLoader.loadAd(PublisherAdRequest.Builder().build())
 
 
     }

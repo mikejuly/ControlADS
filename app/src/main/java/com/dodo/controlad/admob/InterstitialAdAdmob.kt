@@ -10,9 +10,12 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd
 
 
-object  InterstitialAdAdmob {
+
+object InterstitialAdAdmob {
 
     private lateinit var mInterstitialAds: InterstitialAd
 
@@ -24,14 +27,10 @@ object  InterstitialAdAdmob {
 
 
      fun loadAdAdmob() {
-         mInterstitialAds.loadAd(AdRequest.Builder().build())
+        mInterstitialAds.loadAd(AdRequest.Builder().build())
     }
 
     fun showAdAdmob(context: Context, showInterstitialAdsAdmobListener: ShowInterstitialAdsAdmobListener) {
-
-        if (!mInterstitialAds.isLoaded){
-            return
-        }
 
         val dialog = Dialog(context, R.style.DialogFragmentTheme)
         dialog.setContentView(R.layout.dialog_loading_ads_fullscreen)
@@ -54,12 +53,11 @@ object  InterstitialAdAdmob {
                         loadAdAdmob()
                     }
 
-
                 }
                 mInterstitialAds.show()
             }else{
-                showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
                 dialog.dismiss()
+                showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
             }
         },400)
 
