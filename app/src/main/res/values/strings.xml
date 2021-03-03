@@ -13,4 +13,7 @@
     <string name="id_interstitial_facebook">342247763579455_342248430246055</string>
     <string name="admob_id_ads_open">ca-app-pub-3940256099942544/3419835294</string>
     <string name="admob_id_app">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="txt_exit_app">Are you sure you want to exit the application?</string>
+    <string name="btn_exit_app">Exit</string>
+    <string name="btn_no">No</string>
 </resources>
