@@ -49,8 +49,8 @@ class MainActivityControlAds : AppCompatActivity() {
 //
 //        })
 
-        NativeAdAdmob.refreshAd(this, framelayout_ads_native, "#99FFFF", "#000000", "#000000",
-            this.getString(R.string.id_admob_native), false, object : ShowNativeAdsAdmobListener {
+        NativeAdAdmob.refreshAd(this, framelayout_ads_native, "", "#000000", "#000000",
+            this.getString(R.string.id_admob_native), true, object : ShowNativeAdsAdmobListener {
                 override fun onLoadAdsNativeAdmobCompleted() {
                     Log.e("vao day", "vao")
                 }

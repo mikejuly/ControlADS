@@ -46,7 +46,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="503dp"
-
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
