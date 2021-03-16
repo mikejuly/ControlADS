@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "66959897701",
+    "project_id": "adscontroltest",
+    "storage_bucket": "adscontroltest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66959897701:android:90c9bfcb5b68a49ba1028c",
+        "android_client_info": {
+          "package_name": "com.dodo.controlad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66959897701-92r95536c69i9f4rpfpnsbk219qjjgb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALuO0ICTXprqUsgiNpnicxml-jHSD4uLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66959897701-92r95536c69i9f4rpfpnsbk219qjjgb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>ads_admob_interstitial_show_after_times</key>
+        <value>40000</value>
+    </entry>
+    <entry>
+        <key>ads_admob_native_show_after_times</key>
+        <value>40000</value>
+    </entry>
+
+</defaultsMap>

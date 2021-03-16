@@ -1,8 +1,7 @@
 <com.google.android.gms.ads.formats.UnifiedNativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#EAEAEA">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/layout_ads_native"
@@ -10,20 +9,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:minHeight="50dp"
-        android:orientation="vertical"
+        android:orientation="vertical">
 
-       >
-
-        <TextView style="@style/AppTheme.AdAttribution" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingTop="3dp"
-            android:paddingRight="5dp">
-
+            android:paddingLeft="1dp"
+            android:paddingTop="1dp"
+            android:paddingRight="1dp">
 
 
             <LinearLayout
@@ -34,9 +29,10 @@
                 <com.google.android.gms.ads.formats.MediaView
                     android:id="@+id/ad_media"
                     android:layout_width="match_parent"
-                    android:layout_height="175sp"
+                    android:layout_height="170sp"
                     android:layout_gravity="center_horizontal"
-                    />
+                    android:layout_marginBottom="5dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,36 +40,42 @@
 
                     <ImageView
                         android:id="@+id/ad_app_icon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@string/todoa"
                         android:paddingEnd="5dp"
                         android:paddingBottom="2dp"
-                        tools:ignore="RtlSymmetry"
-                        android:contentDescription="@string/todoa" />
+                        tools:ignore="RtlSymmetry" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="3dp">
 
                         <TextView
                             android:id="@+id/ad_headline"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
+                            android:layout_marginEnd="10dp"
                             android:textColor="@color/gray_600"
-                            />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/ad_body"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="20dp"
-                            android:textSize="12sp"
-                            android:textColor="@color/gray_600"/>
+                            android:layout_marginEnd="10dp"
+                            android:maxLines="1"
+                            android:textColor="@color/gray_600"
+                            android:textSize="12sp" />
+                        <TextView style="@style/AppTheme.AdAttribution" />
+
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

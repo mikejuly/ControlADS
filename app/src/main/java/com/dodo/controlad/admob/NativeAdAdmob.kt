@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.dodo.controlad.R
+import com.dodo.controlad.common.Common
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.LoadAdError
@@ -85,8 +86,6 @@ object NativeAdAdmob {
             adView.iconView.visibility = View.VISIBLE
         }
 
-        // This method tells the Google Mobile Ads SDK that you have finished populating your
-        // native ad view with this native ad.
         adView.setNativeAd(nativeAd)
 
 
@@ -100,44 +99,68 @@ object NativeAdAdmob {
         textTitleColor: String,
         textBodyColor: String,
         idAdmobNative: String,
-        isMediaView: Boolean,
+        isMediaView: Boolean,typeAdsNative: Int,
         loadAdsNativeAds: ShowNativeAdsAdmobListener
     ) {
 
-        val builder = AdLoader.Builder(context, idAdmobNative)
+        if (Common.checkTimeShowAdsAdmob(context, Common.TYPE_ADS_ADMOB_NATIVE)){
+            val builder = AdLoader.Builder(context, idAdmobNative)
 
-        builder.forUnifiedNativeAd { unifiedNativeAd ->
-            val adView = context.layoutInflater.inflate(
-                R.layout.admob_native_layout,
-                null
-            ) as UnifiedNativeAdView
-            populateUnifiedNativeAdView(
-                unifiedNativeAd,
-                adView,
-                backgroundAds,
-                textTitleColor,
-                textBodyColor,
-                isMediaView
-            )
-            frameLayoutNative.removeAllViews()
-            frameLayoutNative.addView(adView)
-        }
-
-        val adLoader = builder.withAdListener(object : AdListener() {
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+            if (typeAdsNative == 1){
+                builder.forUnifiedNativeAd { unifiedNativeAd ->
+                    val adView = context.layoutInflater.inflate(
+                        R.layout.admob_native_layout,
+                        null
+                    ) as UnifiedNativeAdView
+                    populateUnifiedNativeAdView(
+                        unifiedNativeAd,
+                        adView,
+                        backgroundAds,
+                        textTitleColor,
+                        textBodyColor,
+                        isMediaView
+                    )
+                    frameLayoutNative.removeAllViews()
+                    frameLayoutNative.addView(adView)
+                }
+            }else{
+                builder.forUnifiedNativeAd { unifiedNativeAd ->
+                    val adView = context.layoutInflater.inflate(
+                        R.layout.admob_native_layout_second,
+                        null
+                    ) as UnifiedNativeAdView
+                    populateUnifiedNativeAdView(
+                        unifiedNativeAd,
+                        adView,
+                        backgroundAds,
+                        textTitleColor,
+                        textBodyColor,
+                        isMediaView
+                    )
+                    frameLayoutNative.removeAllViews()
+                    frameLayoutNative.addView(adView)
+                }
             }
 
-            override fun onAdLoaded() {
-                super.onAdLoaded()
-                loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
+
+            val adLoader = builder.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+                }
+
+                override fun onAdLoaded() {
+                    super.onAdLoaded()
+                    loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
+                }
+
             }
 
+            ).build()
+
+            adLoader.loadAd(PublisherAdRequest.Builder().build())
+        }else{
+            loadAdsNativeAds.onLoadAdsNativeAdmoNotShow()
         }
-
-        ).build()
-
-        adLoader.loadAd(PublisherAdRequest.Builder().build())
 
 
     }

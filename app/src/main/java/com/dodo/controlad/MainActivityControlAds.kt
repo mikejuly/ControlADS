@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.dodo.controlad.admob.*
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.admob_native_ads_back_layout.*
 
@@ -21,7 +24,9 @@ class MainActivityControlAds : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val remoteConfig = Firebase.remoteConfig
 
+        Log.d("get time show main  ", "Config params updated:"+ remoteConfig.getValue("ads_show_after_times").asDouble())
         val inflater = LayoutInflater.from(this)
         inflater.inflate(R.layout.admob_native_ads_back_layout, layout_main)
         layout_ads_native_back.visibility = View.GONE
@@ -50,13 +55,17 @@ class MainActivityControlAds : AppCompatActivity() {
 //        })
 
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "", "#000000", "#000000",
-            this.getString(R.string.id_admob_native), true, object : ShowNativeAdsAdmobListener {
+            this.getString(R.string.id_admob_native), true,1, object : ShowNativeAdsAdmobListener {
                 override fun onLoadAdsNativeAdmobCompleted() {
                     Log.e("vao day", "vao")
                 }
 
                 override fun onLoadAdsNativeAdmobFail() {
 
+                }
+
+                override fun onLoadAdsNativeAdmoNotShow() {
+                    Toast.makeText(this@MainActivityControlAds, "not enough time show native", Toast.LENGTH_LONG).show()
                 }
             })
         NativeAdAdmob.refreshAdNativeBack(this,layout_ads_native_back , fr_ads_native_back,
@@ -67,6 +76,10 @@ class MainActivityControlAds : AppCompatActivity() {
                 }
 
                 override fun onLoadAdsNativeAdmobFail() {
+
+                }
+
+                override fun onLoadAdsNativeAdmoNotShow() {
 
                 }
             })
@@ -80,6 +93,10 @@ class MainActivityControlAds : AppCompatActivity() {
 
                 override fun onInterstitialAdsAdmobClose() {
 
+                }
+
+                override fun onInterstitialAdsNotShow() {
+                    Toast.makeText(this@MainActivityControlAds, "not enough time show", Toast.LENGTH_LONG).show()
                 }
             })
 

@@ -1,18 +1,12 @@
 package com.dodo.controlad.admob
 
 
-import android.app.Dialog
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import com.dodo.controlad.R
+import com.dodo.controlad.common.Common
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest
-import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd
-
 
 
 object InterstitialAdAdmob {
@@ -26,41 +20,38 @@ object InterstitialAdAdmob {
     }
 
 
-     fun loadAdAdmob() {
+    fun loadAdAdmob() {
         mInterstitialAds.loadAd(AdRequest.Builder().build())
     }
 
-    fun showAdAdmob(context: Context, showInterstitialAdsAdmobListener: ShowInterstitialAdsAdmobListener) {
+    fun showAdAdmob(
+        context: Context,
+        showInterstitialAdsAdmobListener: ShowInterstitialAdsAdmobListener
+    ) {
 
-        val dialog = Dialog(context, R.style.DialogFragmentTheme)
-        dialog.setContentView(R.layout.dialog_loading_ads_fullscreen)
-        dialog.show()
+        if (Common.checkTimeShowAdsAdmob(context,Common.TYPE_ADS_ADMOB_INTERSTITIAL)) {
+                if (mInterstitialAds.isLoaded) {
+                    mInterstitialAds.adListener = object : AdListener() {
+                        override fun onAdFailedToLoad(p0: LoadAdError?) {
+                            super.onAdFailedToLoad(p0)
+                            showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
+                        }
 
+                        override fun onAdClosed() {
+                            super.onAdClosed()
+                            showInterstitialAdsAdmobListener.onInterstitialAdsAdmobClose()
+                            loadAdAdmob()
+                        }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (mInterstitialAds.isLoaded) {
-                mInterstitialAds.adListener = object : AdListener() {
-                    override fun onAdFailedToLoad(p0: LoadAdError?) {
-                        super.onAdFailedToLoad(p0)
-                        showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
-                        dialog.dismiss()
                     }
-
-                    override fun onAdClosed() {
-                        super.onAdClosed()
-                        dialog.dismiss()
-                        showInterstitialAdsAdmobListener.onInterstitialAdsAdmobClose()
-                        loadAdAdmob()
-                    }
-
+                    mInterstitialAds.show()
+                } else {
+                    showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
                 }
-                mInterstitialAds.show()
-            }else{
-                dialog.dismiss()
-                showInterstitialAdsAdmobListener.onLoadFailInterstitialAdsAdmob()
-            }
-        },400)
 
+        }else{
+            showInterstitialAdsAdmobListener.onInterstitialAdsNotShow()
+        }
 
     }
 

@@ -4,7 +4,7 @@
     android:id="@+id/layout_ads_native_back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#77000000"
+    android:background="#99000000"
     android:visibility="visible">
 
     <View
@@ -22,7 +22,7 @@
         android:id="@+id/rl_ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/dialog_holo_light_frame"
+        android:background="@drawable/border_view_back"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
             android:paddingRight="20dp"
             app:layout_constraintBottom_toTopOf="@id/fr_ads_native_back"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="10sp"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -46,7 +46,7 @@
                 android:gravity="left"
                 android:paddingBottom="15dp"
                 android:text="@string/txt_exit_app"
-                android:textColor="@color/gray_600"
+                android:textColor="@color/light_blue_400"
                 android:textSize="22sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -54,8 +54,8 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80sp"
+                android:layout_height="40sp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/buttons_exit"
                 android:gravity="center"
@@ -63,38 +63,30 @@
                 android:minHeight="45sp"
                 android:text="@string/btn_exit_app"
 
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/view_div"
+                android:textColor="@android:color/holo_red_light"
+
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_exit" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_no_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80sp"
+                android:layout_height="40sp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/buttons_no_exit"
                 android:gravity="center"
                 android:minWidth="100sp"
                 android:minHeight="45sp"
                 android:text="@string/btn_no"
-                android:textColor="@color/white"
+                android:textColor="@color/light_blue_400"
                 android:layout_marginEnd="30sp"
                 android:layout_marginStart="10sp"
-                app:layout_constraintBottom_toTopOf="@+id/view_div"
-                app:layout_constraintRight_toLeftOf="@id/btn_exit"
-                app:layout_constraintTop_toBottomOf="@+id/tv_exit" />
-
-            <View
-                android:id="@+id/view_div"
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"
-                android:background="@color/gray_400"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-
+                app:layout_constraintRight_toLeftOf="@id/btn_exit"
+                app:layout_constraintTop_toBottomOf="@+id/tv_exit"
                 />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -103,9 +95,9 @@
             android:id="@+id/fr_ads_native_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/dialog_holo_light_frame"
             android:paddingBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

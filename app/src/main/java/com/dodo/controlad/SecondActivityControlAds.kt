@@ -13,13 +13,16 @@ class SecondActivityControlAds : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.second_activity)
 
-        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true, object : ShowNativeAdsAdmobListener {
+        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native),true,2, object : ShowNativeAdsAdmobListener {
             override fun onLoadAdsNativeAdmobCompleted() {
 
             }
 
             override fun onLoadAdsNativeAdmobFail() {
             
+            }
+
+            override fun onLoadAdsNativeAdmoNotShow() {
             }
 
         })
@@ -31,6 +34,10 @@ class SecondActivityControlAds : AppCompatActivity() {
 
             override fun onInterstitialAdsAdmobClose() {
               InterstitialAdAdmob.loadAdAdmob()
+            }
+
+            override fun onInterstitialAdsNotShow() {
+
             }
 
         })

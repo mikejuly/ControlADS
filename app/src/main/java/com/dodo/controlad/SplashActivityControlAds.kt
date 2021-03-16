@@ -7,7 +7,9 @@ import android.os.Bundle
 import com.dodo.controlad.admob.AppOpenManager
 import com.dodo.controlad.admob.ControlAdsAdmob
 import com.dodo.controlad.admob.ShowOpenAdsAdmobListener
+import com.dodo.controlad.common.RemoteConfigControl
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.FirebaseApp
 
 class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
 
@@ -18,6 +20,8 @@ class SplashActivityControlAds : Activity() , ShowOpenAdsAdmobListener{
         ControlAdsAdmob.initAdmob(this)
          appOpenManager = AppOpenManager(application as Application)
         appOpenManager.fetchAd(this.getString(R.string.admob_id_ads_open), this)
+
+        RemoteConfigControl.initRemoteConfig(this)
 
     }
 
