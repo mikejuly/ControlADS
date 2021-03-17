@@ -1,19 +1,23 @@
 <resources>
     <string name="app_name">ControlAd</string>
-    <string name="admob_id_interstitial">/6499/example/interstitial</string>
 
 
 
     <string name="ad_attribution">Ad</string>
-    <string name="id_admob_native">/6499/example/native</string>
     <string name="todo">TODO</string>
     <string name="todoa">TODO</string>
     <string name="loading_ads">Loading Ads...</string>
-    <string name="id_admob_reward">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="id_interstitial_facebook">342247763579455_342248430246055</string>
-    <string name="admob_id_ads_open">ca-app-pub-3940256099942544/3419835294</string>
-    <string name="admob_id_app">ca-app-pub-3940256099942544~3347511713</string>
     <string name="txt_exit_app">Do you want exit the application?</string>
     <string name="btn_exit_app">Exit</string>
     <string name="btn_no">No</string>
+
+
+
+    <string name="id_interstitial_facebook_test">342247763579455_342248430246055</string>
+
+    <string name="admob_id_app_test">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_id_ads_open_test">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="id_admob_native_test">/6499/example/native</string>
+    <string name="admob_id_interstitial_test">/6499/example/interstitial</string>
+    <string name="id_admob_reward_test">ca-app-pub-3940256099942544/5224354917</string>
 </resources>

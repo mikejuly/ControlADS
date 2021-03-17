@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.dodo.controlad.R
+import com.dodo.controlad.common.CheckUtility
 import com.dodo.controlad.common.Common
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
@@ -102,6 +103,10 @@ object NativeAdAdmob {
         isMediaView: Boolean,typeAdsNative: Int,
         loadAdsNativeAds: ShowNativeAdsAdmobListener
     ) {
+        if (!CheckUtility.isNetworkAvailable(context)){
+            loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+            return
+        }
 
         if (Common.checkTimeShowAdsAdmob(context, Common.TYPE_ADS_ADMOB_NATIVE)){
             val builder = AdLoader.Builder(context, idAdmobNative)
@@ -225,7 +230,10 @@ object NativeAdAdmob {
         loadAdsNativeAds: ShowNativeAdsAdmobListener
     ) {
 
-
+        if (!CheckUtility.isNetworkAvailable(context)){
+            loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+            return
+        }
 
         val builder = AdLoader.Builder(context, idAdmobNative)
 
