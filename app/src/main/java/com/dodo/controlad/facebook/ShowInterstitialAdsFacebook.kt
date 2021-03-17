@@ -4,4 +4,5 @@ interface ShowInterstitialAdsFacebook {
     fun onLoadFailInterstitialAdsFacebook()
     fun onLoadedInterstitialAdsFacebook()
     fun onCloseInterstitialAdsFacebook()
+    fun onInterstitialAdsFacebookNotShow()
 }

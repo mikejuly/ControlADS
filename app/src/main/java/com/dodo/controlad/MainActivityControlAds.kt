@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dodo.controlad.admob.*
+import com.dodo.controlad.common.Common
+import com.dodo.controlad.facebook.ControlAdFacebook
+import com.dodo.controlad.facebook.ShowInterstitialAdsFacebook
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.admob_native_ads_back_layout.*
 
@@ -23,21 +26,46 @@ class MainActivityControlAds : AppCompatActivity() {
         layout_ads_native_back.visibility = View.GONE
 
 
-        // Show full Ad Facebook
-//        ControlAdFacebook.initFacebookAds(this,this.getString(R.string.id_interstitial_facebook),object :ShowInterstitialAdsFacebook{
-//            override fun onLoadFailInterstitialAdsFacebook() {
-//              Log.e("vao day", "fail")
-//            }
-//
-//            override fun onLoadedInterstitialAdsFacebook() {
-//                Log.e("vao day", "load done")
-//            }
-//
-//            override fun onCloseInterstitialAdsFacebook() {
-//                Log.e("vao day", "close")
-//            }
-//
-//        })
+
+        if (Common.getPreferenceTypeAds(this)%2 == 0){
+             Common.setPreferenceTypeAds(this,Common.getPreferenceTypeAds(this)+1)
+            //     Show full Ad Facebook
+            ControlAdFacebook.initFacebookAds(this,this.getString(R.string.id_interstitial_facebook_test),object : ShowInterstitialAdsFacebook {
+                override fun onLoadFailInterstitialAdsFacebook() {
+                    Log.e("vao day", "fail")
+                }
+
+                override fun onLoadedInterstitialAdsFacebook() {
+                    Log.e("vao day", "load done")
+                }
+
+                override fun onCloseInterstitialAdsFacebook() {
+                    Log.e("vao day", "close")
+                }
+
+                override fun onInterstitialAdsFacebookNotShow() {
+                    Log.e("vao day", "not yet")
+                }
+
+            })
+        }else{
+            Common.setPreferenceTypeAds(this,Common.getPreferenceTypeAds(this)+1)
+            InterstitialAdAdmob.showAdAdmob(this, object : ShowInterstitialAdsAdmobListener {
+                override fun onLoadFailInterstitialAdsAdmob() {
+
+                }
+
+                override fun onInterstitialAdsAdmobClose() {
+
+                }
+
+                override fun onInterstitialAdsNotShow() {
+                    Toast.makeText(this@MainActivityControlAds, "not enough time show", Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+
+
 
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "", "#000000", "#000000",
             this.getString(R.string.id_admob_native_test), true, 1, object : ShowNativeAdsAdmobListener {
