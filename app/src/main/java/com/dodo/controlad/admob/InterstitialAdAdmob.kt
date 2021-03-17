@@ -40,7 +40,7 @@ object InterstitialAdAdmob {
                         override fun onAdClosed() {
                             super.onAdClosed()
                             showInterstitialAdsAdmobListener.onInterstitialAdsAdmobClose()
-                         //   loadAdAdmob()
+                            loadAdAdmob()
                         }
 
                     }
