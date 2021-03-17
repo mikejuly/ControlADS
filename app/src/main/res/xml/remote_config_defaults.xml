@@ -3,11 +3,15 @@
 <defaultsMap>
     <entry>
         <key>ads_admob_interstitial_show_after_times</key>
-        <value>40000</value>
+        <value>45000</value>
     </entry>
     <entry>
         <key>ads_admob_native_show_after_times</key>
-        <value>40000</value>
+        <value>45000</value>
+    </entry>
+    <entry>
+        <key>ads_facebook_interstitial_show_after_times</key>
+        <value>50000</value>
     </entry>
 
 </defaultsMap>
