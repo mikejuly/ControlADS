@@ -1,45 +1,44 @@
 package com.dodo.controlad.facebook
 
-import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
-import com.dodo.controlad.R
 import com.dodo.controlad.common.Common
 import com.facebook.ads.*
 
 
 object ControlAdFacebook {
 
-    fun initFacebookAds(context: Context, idInterstitialFacebook: String, showInterstitialAdsFacebook: ShowInterstitialAdsFacebook) {
+    private var interstitialAd: InterstitialAd? = null
+    private lateinit var idInterstitialFacebookTemp: String
 
 
+    fun initFacebookAds(context: Context, idInterstitialFacebook: String) {
+        AudienceNetworkAds.initialize(context);
+        interstitialAd = InterstitialAd(context, idInterstitialFacebook)
+        idInterstitialFacebookTemp = idInterstitialFacebook
+        AdSettings.addTestDevice("6b9d6824-945d-4ada-9981-c0a85df513e2")
+
+        interstitialAd!!.loadAd()
+
+    }
+
+    fun showFacebookAds(context: Context, showInterstitialAdsFacebook: ShowInterstitialAdsFacebook) {
         if (Common.checkTimeShowAdsFacebook(context, Common.TYPE_ADS_FACEBOOK_INTERSTITIAL)) {
-            // Initialize the Audience Network SDK
-            AudienceNetworkAds.initialize(context);
-            val interstitialAd = InterstitialAd(context, idInterstitialFacebook)
-            AdSettings.addTestDevice("6b9d6824-945d-4ada-9981-c0a85df513e2")
-            val dialog = Dialog(context, R.style.DialogFragmentTheme)
-            dialog.setContentView(R.layout.dialog_loading_ads_fullscreen)
-            dialog.show()
 
             val interstitialAdListener = object : InterstitialAdListener {
                 override fun onInterstitialDisplayed(ad: Ad) {
                 }
 
                 override fun onInterstitialDismissed(ad: Ad) {
+                    initFacebookAds(context, idInterstitialFacebookTemp)
                     showInterstitialAdsFacebook.onCloseInterstitialAdsFacebook()
                 }
 
                 override fun onError(ad: Ad?, adError: AdError) {
-                    showInterstitialAdsFacebook.onCloseInterstitialAdsFacebook()
-                    dialog.dismiss()
+                    showInterstitialAdsFacebook.onLoadFailInterstitialAdsFacebook()
                 }
 
                 override fun onAdLoaded(ad: Ad) {
                     showInterstitialAdsFacebook.onLoadedInterstitialAdsFacebook()
-                    interstitialAd.show()
-                    dialog.dismiss()
                 }
 
                 override fun onAdClicked(ad: Ad) {
@@ -50,7 +49,16 @@ object ControlAdFacebook {
 
                 }
             }
-            interstitialAd.loadAd(interstitialAd.buildLoadAdConfig().withAdListener(interstitialAdListener).build())
+            if (interstitialAd == null || !interstitialAd!!.isAdLoaded) {
+                showInterstitialAdsFacebook.onInterstitialAdsFacebookNotShow()
+                return
+            }
+            if (interstitialAd!!.isAdInvalidated) {
+                showInterstitialAdsFacebook.onInterstitialAdsFacebookNotShow()
+                return
+            }
+            interstitialAd!!.buildLoadAdConfig().withAdListener(interstitialAdListener).build()
+            interstitialAd!!.show()
         } else {
             showInterstitialAdsFacebook.onInterstitialAdsFacebookNotShow()
         }

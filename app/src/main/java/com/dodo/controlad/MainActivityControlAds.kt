@@ -2,6 +2,7 @@ package com.dodo.controlad
 
 import android.content.Intent
 import android.os.Bundle
+import android.service.controls.Control
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dodo.controlad.admob.*
 import com.dodo.controlad.common.Common
 import com.dodo.controlad.facebook.ControlAdFacebook
-import com.dodo.controlad.facebook.ShowInterstitialAdsFacebook
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.admob_native_ads_back_layout.*
+import com.dodo.controlad.facebook.ShowInterstitialAdsFacebook as ShowInterstitialAdsFacebook1
 
 
 class MainActivityControlAds : AppCompatActivity() {
@@ -26,47 +27,7 @@ class MainActivityControlAds : AppCompatActivity() {
         layout_ads_native_back.visibility = View.GONE
 
 
-
-        if (Common.getPreferenceTypeAds(this)%2 == 0){
-             Common.setPreferenceTypeAds(this,Common.getPreferenceTypeAds(this)+1)
-            //     Show full Ad Facebook
-            ControlAdFacebook.initFacebookAds(this,this.getString(R.string.id_interstitial_facebook_test),object : ShowInterstitialAdsFacebook {
-                override fun onLoadFailInterstitialAdsFacebook() {
-                    Log.e("vao day", "fail")
-                }
-
-                override fun onLoadedInterstitialAdsFacebook() {
-                    Log.e("vao day", "load done")
-                }
-
-                override fun onCloseInterstitialAdsFacebook() {
-                    Log.e("vao day", "close")
-                }
-
-                override fun onInterstitialAdsFacebookNotShow() {
-                    Log.e("vao day", "not yet")
-                }
-
-            })
-        }else{
-            Common.setPreferenceTypeAds(this,Common.getPreferenceTypeAds(this)+1)
-            InterstitialAdAdmob.showAdAdmob(this, object : ShowInterstitialAdsAdmobListener {
-                override fun onLoadFailInterstitialAdsAdmob() {
-
-                }
-
-                override fun onInterstitialAdsAdmobClose() {
-
-                }
-
-                override fun onInterstitialAdsNotShow() {
-                    Toast.makeText(this@MainActivityControlAds, "not enough time show", Toast.LENGTH_LONG).show()
-                }
-            })
-        }
-
-
-
+        // Native admob
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "", "#000000", "#000000",
             this.getString(R.string.id_admob_native_test), true, 1, object : ShowNativeAdsAdmobListener {
                 override fun onLoadAdsNativeAdmobCompleted() {
@@ -81,6 +42,7 @@ class MainActivityControlAds : AppCompatActivity() {
                     Toast.makeText(this@MainActivityControlAds, "not enough time show native", Toast.LENGTH_LONG).show()
                 }
             })
+        // Back ads native admob
         NativeAdAdmob.refreshAdNativeBack(this, layout_ads_native_back, fr_ads_native_back, this.getString(R.string.id_admob_native_test), true, object : ShowNativeAdsAdmobListener {
             override fun onLoadAdsNativeAdmobCompleted() {
                 Log.e("vao day", "vao")
@@ -111,7 +73,6 @@ class MainActivityControlAds : AppCompatActivity() {
                     Toast.makeText(this@MainActivityControlAds, "not enough time show", Toast.LENGTH_LONG).show()
                 }
             })
-
 
         }
 
@@ -147,10 +108,29 @@ class MainActivityControlAds : AppCompatActivity() {
         }
 
 
-        // Next activity...
+        // Next activity... show facebook ads
         this.btn_next_activity.setOnClickListener {
-            val intent = Intent(this, SecondActivityControlAds::class.java)
-            startActivity(intent)
+            ControlAdFacebook.showFacebookAds(this,object : com.dodo.controlad.facebook.ShowInterstitialAdsFacebook{
+                override fun onLoadFailInterstitialAdsFacebook() {
+                    val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onLoadedInterstitialAdsFacebook() {
+
+                }
+
+                override fun onCloseInterstitialAdsFacebook() {
+                    val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onInterstitialAdsFacebookNotShow() {
+
+                }
+
+            })
+
         }
 
 

@@ -27,19 +27,19 @@ class SecondActivityControlAds : AppCompatActivity() {
 
         })
 
-        InterstitialAdAdmob.showAdAdmob(this,showInterstitialAdsAdmobListener = object : ShowInterstitialAdsAdmobListener {
-            override fun onLoadFailInterstitialAdsAdmob() {
-
-            }
-
-            override fun onInterstitialAdsAdmobClose() {
-              InterstitialAdAdmob.loadAdAdmob()
-            }
-
-            override fun onInterstitialAdsNotShow() {
-
-            }
-
-        })
+//        InterstitialAdAdmob.showAdAdmob(this,showInterstitialAdsAdmobListener = object : ShowInterstitialAdsAdmobListener {
+//            override fun onLoadFailInterstitialAdsAdmob() {
+//
+//            }
+//
+//            override fun onInterstitialAdsAdmobClose() {
+//              InterstitialAdAdmob.loadAdAdmob()
+//            }
+//
+//            override fun onInterstitialAdsNotShow() {
+//
+//            }
+//
+//        })
     }
 }

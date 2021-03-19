@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import com.dodo.controlad.admob.*
+import com.dodo.controlad.facebook.ControlAdFacebook
 
 class SplashActivityControlAds : Activity(), ShowOpenAdsAdmobListener {
 
@@ -25,6 +26,7 @@ class SplashActivityControlAds : Activity(), ShowOpenAdsAdmobListener {
         // Init ads Full Admob...
         InterstitialAdAdmob.initAdAdmob(this, this.getString(R.string.admob_id_interstitial_test))
 
+        ControlAdFacebook.initFacebookAds(this,getString(R.string.id_interstitial_facebook_test))
     }
 
     override fun onLoadedAdsOpenApp() {
