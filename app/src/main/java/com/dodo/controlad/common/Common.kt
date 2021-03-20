@@ -6,6 +6,7 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 
 object Common {
 
+    const val  MY_PREFS_CONTROL_ADS = "control_ads_prefs";
 
     const val TYPE_ADS_FACEBOOK_INTERSTITIAL = "type_ads_facebook_interstitial"
     const val TYPE_ADS_FACEBOOK_NATIVE = "type_ads_facebook_native"
@@ -29,33 +30,50 @@ object Common {
     private const val REMOTE_CONFIG_ADS_SHOW_TIME_DEFAULT = 50000L
 
     private const val PREF_TYPE_SHOW_ADS_IS_ADMOB = "pref_type_ads_is_admob"
-    private const val DEFAULT_COUNT_TYPE_ADS_SHOW = 1
+    private const val PREF_TIME_SHOW_ADS = "pref_time_show_ads"
+    private const val DEFAULT_TIME_ADS_SHOW = 30L
+    private const val DEFAULT_TYPE_ADS_SHOW = 1
 
     private fun setPreferenceTimeShowAds(context: Context, timeShowAds: Long, keyTypeAds: String) {
-        val preference = context.getSharedPreferences(keyTypeAds, Context.MODE_PRIVATE)
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
         val editor = preference.edit()
         editor.putLong(keyTypeAds, timeShowAds)
         editor.apply()
     }
 
-    fun getPreferenceTypeAds(context: Context): Int {
-        val preference = context.getSharedPreferences(PREF_TYPE_SHOW_ADS_IS_ADMOB, Context.MODE_PRIVATE)
-        return preference.getInt(PREF_TYPE_SHOW_ADS_IS_ADMOB, DEFAULT_COUNT_TYPE_ADS_SHOW)
+    fun getPreferenceTimeShowAds(context: Context): Long {
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
+        return preference.getLong(PREF_TIME_SHOW_ADS, DEFAULT_TIME_ADS_SHOW)
     }
 
-    fun setPreferenceTypeAds(context: Context, keyTypeAds: Int) {
-        val preference = context.getSharedPreferences(PREF_TYPE_SHOW_ADS_IS_ADMOB, Context.MODE_PRIVATE)
+    // Set time so sanh voi time da show ads va cong them time he thong
+    fun setPreferenceTimeShowAds(context: Context, timeShowAds: Long) {
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
         val editor = preference.edit()
-        editor.putInt(PREF_TYPE_SHOW_ADS_IS_ADMOB, keyTypeAds)
+        editor.putLong(PREF_TIME_SHOW_ADS, timeShowAds + getTimeSystem())
         editor.apply()
     }
 
+    fun getPreferenceTypeShowAds(context: Context): Int {
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
+        return preference.getInt(PREF_TYPE_SHOW_ADS_IS_ADMOB, DEFAULT_TYPE_ADS_SHOW)
+    }
+
+    fun setPreferenceTypeShowAds(context: Context, typeShowAds: Int) {
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
+        val editor = preference.edit()
+        editor.putInt(PREF_TYPE_SHOW_ADS_IS_ADMOB, typeShowAds)
+        editor.apply()
+    }
+
+
+
     private fun getPreferenceTimeShowAds(context: Context, keyTypeAds: String): Long {
-        val preference = context.getSharedPreferences(keyTypeAds, Context.MODE_PRIVATE)
+        val preference = context.getSharedPreferences(MY_PREFS_CONTROL_ADS, Context.MODE_PRIVATE)
         return preference.getLong(keyTypeAds, REMOTE_CONFIG_ADS_SHOW_TIME_DEFAULT)
     }
 
-    private fun getTimeSystem(): Long {
+     fun getTimeSystem(): Long {
         return System.currentTimeMillis()
     }
 
@@ -101,7 +119,6 @@ object Common {
 
 
     fun checkTimeShowAdsFacebook(context: Context, typeAds: String): Boolean {
-
         val remoteConfig = Firebase.remoteConfig
         when (typeAds) {
             TYPE_ADS_FACEBOOK_INTERSTITIAL -> {

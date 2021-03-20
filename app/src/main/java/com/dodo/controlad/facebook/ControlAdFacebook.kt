@@ -15,7 +15,8 @@ object ControlAdFacebook {
         AudienceNetworkAds.initialize(context);
         interstitialAd = InterstitialAd(context, idInterstitialFacebook)
         idInterstitialFacebookTemp = idInterstitialFacebook
-        AdSettings.addTestDevice("6b9d6824-945d-4ada-9981-c0a85df513e2")
+
+        AdSettings.addTestDevice("26eddfa0-31d6-465a-a994-b184428b0f51")
 
         interstitialAd!!.loadAd()
 

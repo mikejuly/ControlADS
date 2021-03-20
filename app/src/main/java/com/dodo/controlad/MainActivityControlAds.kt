@@ -110,26 +110,49 @@ class MainActivityControlAds : AppCompatActivity() {
 
         // Next activity... show facebook ads
         this.btn_next_activity.setOnClickListener {
-            ControlAdFacebook.showFacebookAds(this,object : com.dodo.controlad.facebook.ShowInterstitialAdsFacebook{
-                override fun onLoadFailInterstitialAdsFacebook() {
-                    val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
-                    startActivity(intent)
-                }
 
-                override fun onLoadedInterstitialAdsFacebook() {
+            if (Common.getPreferenceTimeShowAds(this)< Common.getTimeSystem()&& Common.getPreferenceTypeShowAds(this)==1){
+                Common.setPreferenceTypeShowAds(this,2)
+                Common.setPreferenceTimeShowAds(this,10000)
+                ControlAdFacebook.showFacebookAds(this,object : com.dodo.controlad.facebook.ShowInterstitialAdsFacebook{
+                    override fun onLoadFailInterstitialAdsFacebook() {
+                        val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
+                        startActivity(intent)
+                    }
 
-                }
+                    override fun onLoadedInterstitialAdsFacebook() {
 
-                override fun onCloseInterstitialAdsFacebook() {
-                    val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
-                    startActivity(intent)
-                }
+                    }
 
-                override fun onInterstitialAdsFacebookNotShow() {
+                    override fun onCloseInterstitialAdsFacebook() {
+                        val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
+                        startActivity(intent)
+                    }
 
-                }
+                    override fun onInterstitialAdsFacebookNotShow() {
 
-            })
+                    }
+
+                })
+            }else if (Common.getPreferenceTimeShowAds(this)< Common.getTimeSystem()&& Common.getPreferenceTypeShowAds(this)==2){
+                Common.setPreferenceTypeShowAds(this,1)
+                Common.setPreferenceTimeShowAds(this,10000)
+                InterstitialAdAdmob.showAdAdmob(this, object : ShowInterstitialAdsAdmobListener {
+                    override fun onLoadFailInterstitialAdsAdmob() {
+
+                    }
+
+                    override fun onInterstitialAdsAdmobClose() {
+
+                    }
+
+                    override fun onInterstitialAdsNotShow() {
+                        Toast.makeText(this@MainActivityControlAds, "not enough time show", Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+
+
 
         }
 
