@@ -29,7 +29,7 @@ class MainActivityControlAds : AppCompatActivity() {
 
         // Native admob
         NativeAdAdmob.refreshAd(this, framelayout_ads_native, "", "#000000", "#000000",
-            this.getString(R.string.id_admob_native_test), true, 1, object : ShowNativeAdsAdmobListener {
+            this.getString(R.string.id_admob_native_test), true, 2, object : ShowNativeAdsAdmobListener {
                 override fun onLoadAdsNativeAdmobCompleted() {
                     Log.e("vao day", "vao")
                 }
@@ -130,6 +130,8 @@ class MainActivityControlAds : AppCompatActivity() {
                     }
 
                     override fun onInterstitialAdsFacebookNotShow() {
+                        val intent = Intent(this@MainActivityControlAds, SecondActivityControlAds::class.java)
+                        startActivity(intent)
 
                     }
 

@@ -13,7 +13,8 @@ class SecondActivityControlAds : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.second_activity)
 
-        NativeAdAdmob.refreshAd(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native_test),true,2, object : ShowNativeAdsAdmobListener {
+        NativeAdAdmob.refreshAdNotTimeCount(this,framelayout_ads_native2,"#FFFFFF","#000000","#000000",this.getString(R.string.id_admob_native_test),true,1, object :
+            ShowNativeAdsAdmobListener {
             override fun onLoadAdsNativeAdmobCompleted() {
 
             }

@@ -93,6 +93,80 @@ object NativeAdAdmob {
     }
 
 
+    fun refreshAdNotTimeCount(
+        context: Activity,
+        frameLayoutNative: FrameLayout,
+        backgroundAds: String,
+        textTitleColor: String,
+        textBodyColor: String,
+        idAdmobNative: String,
+        isMediaView: Boolean,typeAdsNative: Int,
+        loadAdsNativeAds: ShowNativeAdsAdmobListener
+    ) {
+        if (!CheckUtility.isNetworkAvailable(context)){
+            loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+            return
+        }
+
+            val builder = AdLoader.Builder(context, idAdmobNative)
+
+            if (typeAdsNative == 1){
+                builder.forUnifiedNativeAd { unifiedNativeAd ->
+                    val adView = context.layoutInflater.inflate(
+                        R.layout.admob_native_layout,
+                        null
+                    ) as UnifiedNativeAdView
+                    populateUnifiedNativeAdView(
+                        unifiedNativeAd,
+                        adView,
+                        backgroundAds,
+                        textTitleColor,
+                        textBodyColor,
+                        isMediaView
+                    )
+                    frameLayoutNative.removeAllViews()
+                    frameLayoutNative.addView(adView)
+                }
+            }else{
+                builder.forUnifiedNativeAd { unifiedNativeAd ->
+                    val adView = context.layoutInflater.inflate(
+                        R.layout.admob_native_layout_second,
+                        null
+                    ) as UnifiedNativeAdView
+                    populateUnifiedNativeAdView(
+                        unifiedNativeAd,
+                        adView,
+                        backgroundAds,
+                        textTitleColor,
+                        textBodyColor,
+                        isMediaView
+                    )
+                    frameLayoutNative.removeAllViews()
+                    frameLayoutNative.addView(adView)
+                }
+            }
+
+
+            val adLoader = builder.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    loadAdsNativeAds.onLoadAdsNativeAdmobFail()
+                }
+
+                override fun onAdLoaded() {
+                    super.onAdLoaded()
+                    loadAdsNativeAds.onLoadAdsNativeAdmobCompleted()
+                }
+
+            }
+
+            ).build()
+
+            adLoader.loadAd(PublisherAdRequest.Builder().build())
+
+
+
+    }
+
     fun refreshAd(
         context: Activity,
         frameLayoutNative: FrameLayout,
